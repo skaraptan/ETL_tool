@@ -10,14 +10,20 @@ import java.util.ArrayList;
  */
 public class ETLProcessingService {
     private String url;
+
+    public String getProductCode() {
+        return productCode;
+    }
+
     private String productCode;
 
-    private ArrayList<Review> reviews;
-    private Product product;
+    private ArrayList<Review> reviews = new ArrayList<Review>();
+    private Product product = new Product();
 
     private Elements untransformedReviews;
     private Elements untransformedProduct;
-
+    private HtmlUploadService htmlUploadService;
+    private ElementsGettingService elementsGettingService;
     public ArrayList<Review> getReviews() {
         return reviews;
     }
@@ -34,46 +40,28 @@ public class ETLProcessingService {
         return untransformedProduct;
     }
 
-
-
-
-    public ETLProcessingService(String url){
+    public ETLProcessingService(String url) throws IOException, ResponseException {
         this.url = url;
         this.productCode = url.replaceFirst("http://www.ceneo.pl/", "");
+        htmlUploadService = new HtmlUploadService();
+        elementsGettingService = new ElementsGettingService(htmlUploadService.getFileFromWeb(url));
     }
 
     public Elements extractProduct(){
-        Elements elements = null;
-        try {
-            HtmlUploadService htmlUploadService = new HtmlUploadService();
-            ElementsGettingService elementsGettingService = new ElementsGettingService(htmlUploadService.getFileFromWeb(url));
-            elements = elementsGettingService.getAllElements();
-        } catch (ResponseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            return  untransformedProduct = elements;
-        }
+        Elements elements = elementsGettingService.getAllElements();
+        return  this.untransformedProduct = elements;
     }
     public Elements extractReviews(){
-        Elements elements = null;
-        try {
-            HtmlUploadService htmlUploadService = new HtmlUploadService();
-            ElementsGettingService elementsGettingService = new ElementsGettingService(htmlUploadService.getFileFromWeb(url));
-            elements = elementsGettingService.getReviews();
-        } catch (ResponseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            return untransformedReviews = elements;
-        }
+        Elements elements = elementsGettingService.getReviews();
+        return this.untransformedReviews = elements;
     }
     public Product transformProduct(Elements elements){
-        ProductParsingService productParsingService = new ProductParsingServiceImpl(elements.get(0));
+        ProductParsingService productParsingService = new ProductParsingServiceImpl(elements.first());
+        return this.product = productParsingService.getProductAsAnObject();
+    }
+
+    public Product transformProduct(){
+        ProductParsingService productParsingService = new ProductParsingServiceImpl(untransformedProduct.first());
         return this.product = productParsingService.getProductAsAnObject();
     }
 
@@ -87,8 +75,17 @@ public class ETLProcessingService {
         }
         return this.reviews = reviews;
     }
+    public ArrayList<Review> transformReviews(){
+        ReviewParsingService reviewParsingService = new ReviewParsingServiceImpl();
+        reviewParsingService.setProduct(product);
+        for(Element element : untransformedReviews) {
+            reviewParsingService.setElement(element);
+            reviews.add(reviewParsingService.getReviewAsAnObject());
+        }
+        return reviews;
+    }
 
-    public void loadAll(){
+    public void doETL(){
         ProductStoringService productStoringService = new ProductStoringServiceImpl();
         productStoringService.addProduct(transformProduct(extractProduct()));
         ReviewStoringService reviewStoringService = new ReviewStoringServiceImpl();
@@ -96,9 +93,13 @@ public class ETLProcessingService {
             reviewStoringService.addReview(review);
         }
     }
-
-    public void doETL(){
-        loadAll();
+    public void loadAll(){
+        ProductStoringService productStoringService = new ProductStoringServiceImpl();
+        productStoringService.addProduct(product);
+        ReviewStoringService reviewStoringService = new ReviewStoringServiceImpl();
+        for(Review review : reviews){
+            reviewStoringService.addReview(review);
+        }
+        htmlUploadService.deleteDoc();
     }
-
 }

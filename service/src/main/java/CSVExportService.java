@@ -8,5 +8,6 @@ public interface CSVExportService {
     void exportToCSV(ArrayList<Review> reviews) throws IOException;
     void exportToCSV(Review review) throws IOException;
     CSVExportService setSeparator(char separator);
+    String getPath();
 
 }

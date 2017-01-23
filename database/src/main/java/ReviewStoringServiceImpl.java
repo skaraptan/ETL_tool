@@ -2,6 +2,9 @@ import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Yoga2pro on 10.01.2017.
  */
@@ -46,5 +49,19 @@ public class ReviewStoringServiceImpl implements ReviewStoringService {
             return true;
         }
         return true;
+    }
+
+    public void deleteReviews(String productId) {
+        try{
+        Session session = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("From Review where product.productId = :product_id");
+        query.setString("product_id", productId);
+        List<Review> reviews = query.list();
+        session.beginTransaction();
+        for(Review review : reviews)
+        session.delete(review);
+        session.getTransaction().commit();}
+        catch (Exception e){}
     }
 }

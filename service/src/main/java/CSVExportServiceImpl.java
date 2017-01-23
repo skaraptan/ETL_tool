@@ -12,12 +12,12 @@ public class CSVExportServiceImpl implements CSVExportService{
     private ArrayList<String[]> reviewsAsATable = new ArrayList<String[]>();
     private char separator;
     private CSVWriter csvWriter;
-    private FileWriter fileWriter;
+    private File file;
 
     public CSVExportServiceImpl(){
     }
     public void exportToCSV(ArrayList<Review> reviews) throws IOException {
-        csvWriter = new CSVWriter(fileWriter = new FileWriter("reviews.csv"), ',');
+        csvWriter = new CSVWriter(new FileWriter(file = new File("reviews.csv")), ',');
         for(Review review : reviews){
             String[] reviewAsATable = new String[]{review.getProduct().getProductId(), review.getAuthor(), review.getConclusion(), review.getPros(), review.getCons(),
             review.getStarsRate(), review.getRecommended(), "" + review.getUsefulnessRate(), "" + review.getUselessRate()};
@@ -32,5 +32,9 @@ public class CSVExportServiceImpl implements CSVExportService{
 
     public CSVExportService setSeparator(char separator) {
         return this;
+    }
+
+    public String getPath() {
+        return file.getAbsolutePath();
     }
 }

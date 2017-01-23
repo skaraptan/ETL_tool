@@ -12,7 +12,6 @@
         <module>model</module>
         <module>service</module>
         <module>database</module>
-        <module>user_interface</module>
     </modules>
     <dependencies>
         <dependency>

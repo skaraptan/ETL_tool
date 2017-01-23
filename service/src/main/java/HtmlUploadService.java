@@ -9,13 +9,14 @@ import java.io.IOException;
  */
 public class HtmlUploadService {
     private File htmlPage;
+
     public HtmlUploadService(){
     }
 
     public File getFileFromWeb(String url) throws ResponseException, IOException {
         UserAgent ua = new UserAgent();
         ua.visit(url);
-        ua.doc.saveCompleteWebPage(htmlPage = new File("C:\\Users\\Yoga2pro\\Desktop\\index.htm"));
+        ua.doc.saveCompleteWebPage(htmlPage = new File(".\\index.html"));
         return htmlPage;
     }
 

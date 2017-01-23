@@ -4,5 +4,5 @@
 public interface ReviewStoringService {
     void addReview(Review review);
     boolean checkIfExists(Review review);
-
+    void deleteReviews(String productId);
 }

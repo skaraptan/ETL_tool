@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="StartWindow">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="864" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="584b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="2" row-span="2" col-span="3" vsize-policy="0" hsize-policy="0" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="10"/>
+          <horizontalAlignment value="10"/>
+          <horizontalTextPosition value="4"/>
+          <text value="Made by S.Karaptan &amp; J.Krekora. All rights reserved"/>
+        </properties>
+      </component>
+      <component id="a8287" class="javax.swing.JButton" binding="wholeETLButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Whole ETL"/>
+        </properties>
+      </component>
+      <component id="e4708" class="javax.swing.JButton" binding="extractButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Extract"/>
+        </properties>
+      </component>
+      <component id="3e4fa" class="javax.swing.JButton" binding="transformButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Transform"/>
+        </properties>
+      </component>
+      <component id="e071a" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="a363a" class="javax.swing.JButton" binding="loadButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Load"/>
+        </properties>
+      </component>
+      <component id="d7aab" class="javax.swing.JButton" binding="exportToCSVButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Export to CSV"/>
+        </properties>
+      </component>
+      <component id="51d85" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="781c2" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Product address:"/>
+        </properties>
+      </component>
+      <component id="cb0c9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Product id"/>
+        </properties>
+      </component>
+      <component id="ab77d" class="javax.swing.JButton" binding="clearReviewsButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Clear reviews"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

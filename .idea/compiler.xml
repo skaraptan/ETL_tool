@@ -25,7 +25,6 @@
         <module name="database" />
         <module name="model" />
         <module name="service" />
-        <module name="user_interface" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
