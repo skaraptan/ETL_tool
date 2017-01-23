@@ -26,6 +26,11 @@
             <artifactId>ETL_app_model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>3.1</version>
+        </dependency>
     </dependencies>
 
 

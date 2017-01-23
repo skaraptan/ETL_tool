@@ -12,6 +12,31 @@ public class ETLProcessingService {
     private String url;
     private String productCode;
 
+    private ArrayList<Review> reviews;
+    private Product product;
+
+    private Elements untransformedReviews;
+    private Elements untransformedProduct;
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Elements getUntransformedReviews() {
+        return untransformedReviews;
+    }
+
+    public Elements getUntransformedProduct() {
+        return untransformedProduct;
+    }
+
+
+
+
     public ETLProcessingService(String url){
         this.url = url;
         this.productCode = url.replaceFirst("http://www.ceneo.pl/", "");
@@ -29,7 +54,7 @@ public class ETLProcessingService {
             e.printStackTrace();
         }
         finally {
-            return elements;
+            return  untransformedProduct = elements;
         }
     }
     public Elements extractReviews(){
@@ -44,12 +69,12 @@ public class ETLProcessingService {
             e.printStackTrace();
         }
         finally {
-            return elements;
+            return untransformedReviews = elements;
         }
     }
     public Product transformProduct(Elements elements){
         ProductParsingService productParsingService = new ProductParsingServiceImpl(elements.get(0));
-        return productParsingService.getProductAsAnObject();
+        return this.product = productParsingService.getProductAsAnObject();
     }
 
     public ArrayList<Review> transformReviews(Elements elements){
@@ -60,7 +85,7 @@ public class ETLProcessingService {
             reviewParsingService.setElement(element);
             reviews.add(reviewParsingService.getReviewAsAnObject());
         }
-        return reviews;
+        return this.reviews = reviews;
     }
 
     public void loadAll(){
